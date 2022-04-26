@@ -12,7 +12,7 @@ class Jump_Jel {  // 점프왕 쩰리(small) - 16173
     static int N = 0;           // 게임의 크기
     static String result;       // 결과 저장 String 객체
     static int[] dx = {1, -1, 0, 0};  // dx, dy : 탐색할 때 상하좌우로 한칸씩 이동하는 값 세팅
-    static int[] dy = {0, 0, 1, 0};
+    static int[] dy = {0, 0, 1, -1};
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
