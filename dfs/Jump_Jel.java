@@ -52,7 +52,11 @@ class Jump_Jel {  // 점프왕 쩰리(small) - 16173
             result = "HaruHaru";
         }
 
-        for (int i = 0; i <= 2; i = i + 2) {  // 오른쪽하고 아래만 움직일 수 있으므로 2번만 반복을 돌면됨, i == 0 : 아래, i == 1 오른쪽
+        if(Jump_Value == 0) {    // 값이 0 이면 재귀가 무한호출 되기 때문에 종료
+            return;
+        }
+
+        for (int i = 0; i <= 2; i = i + 2) {  // 오른쪽하고 아래만 움직일 수 있으므로 2번만 반복을 돌면됨, i == 0 : 아래, i == 2 오른쪽
             int xF = Start_X + (dx[i] * Jump_Value);   // Jump_Value를 곱해주는 이유는 그 값만큼을 점프하기 때문임
             int yF = Start_Y + (dy[i] * Jump_Value);
 
