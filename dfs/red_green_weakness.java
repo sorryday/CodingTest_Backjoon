@@ -62,13 +62,9 @@ class red_green_weakness {
             int xf = x + dx[i];
             int yf = y + dy[i];
 
-            if (xf >= 0 && yf >= 0 && xf < N && yf < N && !visited[xf][yf] && (map[x][y] == map[xf][yf])) {
-                dfs_yes(xf, yf);
-            }
-            else if(xf >= 0 && yf >= 0 && xf < N && yf < N && !visited[xf][yf]) {
-                if ((map[x][y] == 'R' && map[xf][yf] == 'G') || (map[x][y] == 'G' && map[xf][yf] == 'R')) {
+            if (xf >= 0 && yf >= 0 && xf < N && yf < N && !visited[xf][yf]) {
+                if((map[x][y] == map[xf][yf]) || (map[x][y] == 'R' && map[xf][yf] == 'G') || (map[x][y] == 'G' && map[xf][yf] == 'R'))
                     dfs_yes(xf, yf);
-                }
             }
         }
     }
