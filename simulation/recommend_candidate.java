@@ -44,7 +44,7 @@ class recommend_candidate {
             else if (frame.size() <= N) {
                 plusRecommend(i);
 
-                if (!flag && frame.size() < N) {                            // 추천 받은 학생이 프레임에 없을 경우
+                if (!flag && frame.size() < N) {                            // 추천 받은 학생이 사진 틀에 없을 경우
                     info.recomm_cnt += 1;
                     frame.add(info);
                 }
@@ -53,7 +53,7 @@ class recommend_candidate {
                     int idx = 0;
                     int min = Integer.MAX_VALUE;
 
-                    for (int k = 0; k < frame.size(); k++) {            // 남은 프레임이 없고 새로운 사람이 추천 받았을 떄.
+                    for (int k = 0; k < frame.size(); k++) {            // 남은 사진 틀이 없고 새로운 사람이 추천 받았을 떄.
                         if (frame.get(k).recomm_cnt < min) {
                             min = frame.get(k).recomm_cnt;
                             idx = k;
