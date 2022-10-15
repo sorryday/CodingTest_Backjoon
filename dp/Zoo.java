@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-class zoo {
+class Zoo {
     static long[][] dp;
 
     public static void main(String[] args) throws Exception {
