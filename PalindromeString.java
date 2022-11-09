@@ -46,18 +46,20 @@ public class PalindromeString {
 
     // 회문이 아닐때
     private static boolean NotPalindrome(int left, int right) {
-
         while(left <= right) {
             if(input.charAt(left) != input.charAt(right)) {
-                boolean a = Palindrome(left+1,right);
-                boolean b = Palindrome(left,right-1);
+                boolean a = Palindrome(left + 1,right);
+                boolean b = Palindrome(left,right - 1);
 
-                if(a==false && b==false) {
+                if(a == false && b == false) {
                     return false;
-                }else return true;
+                } else{
+                    return true;
+                }
+
             }
-            left+=1;
-            right-=1;
+            left++;
+            right--;
         }
         return true;
     }
