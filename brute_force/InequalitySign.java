@@ -2,62 +2,77 @@ package brute_force;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class InequalitySign {
+    static boolean[] visited;
+    static int K;
+    static List<String> s_list = new ArrayList<>();
+    static String[] s_array;
 
-    static boolean[] check = new boolean[10]; // 0~9까지 check
-    static int n;
-    static char[] a = new char[10]; // 부등호는 최대 9개임
-    static ArrayList ans = new ArrayList<>();
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-    static boolean ck(char a, char b, char c) {
-        if (c == '<') {
-            if (a > b) {
-                return false;
-            }
+        K = Integer.parseInt(br.readLine());
+        s_array = new String[(2 * K) + 1];
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 1; i <= K; i++) {
+            s_array[(2 * i) - 1] = st.nextToken();
         }
-        if (c == '>') {
-            if (a < b) {
-                return false;
+
+        // 사용한 숫자를 표시하는 visited[]
+        visited = new boolean[10];
+        listBack(0);
+
+        Collections.sort(s_list);
+        bw.write(s_list.get(s_list.size() - 1) + "\n" +  s_list.get(0));
+        bw.flush();
+        bw.close();
+        br.close();
+    }
+
+    private static void listBack(int idx) {
+        if (idx > s_array.length) {
+            if (isCorrect(s_array)) {
+                StringBuffer sb = new StringBuffer();
+                for (int i = 0; i < s_array.length; i++) {
+                    sb.append(s_array[i]);
+                }
+                s_list.add(sb.toString().replaceAll(">", "").replaceAll("<", ""));
+            }
+            return;
+        }
+
+        for (int i = 0; i < 10; i++) {
+            if (visited[i]) continue;
+            visited[i] = true;
+            s_array[idx] = Integer.toString(i);
+
+            listBack(idx + 2);
+            visited[i] = false;
+        }
+    }
+
+    private static boolean isCorrect(String[] s_array) {
+        for (int i = 0; i < s_array.length; i++) {
+            if (s_array[i].equals(">")) {
+                if (Integer.parseInt(s_array[i - 1]) < Integer.parseInt(s_array[i + 1])) {
+                    return false;
+                }
+            } else if (s_array[i].equals("<")) {
+                if (Integer.parseInt(s_array[i - 1]) > Integer.parseInt(s_array[i + 1])) {
+                    return false;
+                }
             }
         }
         return true;
     }
-
-    static void go(int index, String num) {
-        if (index == n + 1) {
-            ans.add(num);
-            return;
-        }
-
-        for (int i = 0; i <= 9; i++) {
-            if (check[i])
-                continue;
-            if (index == 0 || ck(num.charAt(index - 1), (char) (i + '0'), a[index - 1])) {
-                check[i] = true;
-                go(index + 1, num + Integer.toString(i));
-                check[i] = false;
-            }
-        }
-
-    }
-
-    public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-
-        for (int i = 0; i < n; i++) {
-            a[i] = sc.next().toCharArray()[0];
-        }
-
-        go(0, "");
-        Collections.sort(ans);
-
-        System.out.println(ans.get(ans.size() - 1));
-        System.out.println(ans.get(0));
-
-    }
-
 }
+
