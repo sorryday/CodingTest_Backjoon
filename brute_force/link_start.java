@@ -28,7 +28,7 @@ public class link_start {
             }
         }
 
-        setTeam(0);
+        setTeam(0, 1);
 
         bw.write(Integer.toString(result));
         bw.flush();
@@ -38,13 +38,20 @@ public class link_start {
 
     // 팀원을 셋팅하는 함수
     // idx : 스타트 팀원을 고를 인덱스
-    private static void setTeam(int idx) throws Exception {
+    // depth : 스타트팀의 인원의 수
+    private static void setTeam(int idx, int depth) throws Exception {
         for (int i = idx; i < N; i++) {
             if (!visited[i]) {
                 visited[i] = true;
             }
-            statsHap(); // 팀원이 1명이어도 된다고 했으므로
-            setTeam(i + 1);
+
+            if (depth <= N / 2) {
+                statsHap();
+            } else {
+                return;
+            }
+
+            setTeam(i + 1, depth + 1);
             visited[i] = false;
         }
     }
