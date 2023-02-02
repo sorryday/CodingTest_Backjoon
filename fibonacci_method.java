@@ -1,36 +1,49 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class fibonacci_method {
-    static int one_cnt = 0, zero_cnt = 0, next_hap = 0;
-    public static void main(String[] args) throws IOException{
+    static int zeroCnt = 0;
+    static int oneCnt = 0;
+
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringBuffer sb = new StringBuffer();
 
-        int cnt = Integer.parseInt(br.readLine()); // 반복횟수
-        for(int i = 0; i < cnt; i++) {
-            int num = Integer.parseInt(br.readLine());
-            fibo(num);
-            sb.append(zero_cnt + " " + one_cnt + "\n");
+        int T = Integer.parseInt(br.readLine());
+        for (int i = 0; i < T; i++) {
+            int N = Integer.parseInt(br.readLine());
+            zeroCnt = 0;
+            oneCnt = 0;
+
+            if (N == 0) {
+                zeroCnt = 1;
+            } else if (N == 1) {
+                oneCnt = 1;
+            } else {
+                fibonacci(N);
+            }
+
+            bw.write(Integer.toString(zeroCnt) + " " + Integer.toString(oneCnt) + "\n");
         }
-        bw.write(sb.toString());
+
         bw.flush();
         bw.close();
         br.close();
     }
 
-    static void fibo(int num) {
-        zero_cnt = 1;
-		one_cnt = 0;
-        next_hap = 1;
-        for(int i = 0; i < num; i++) {
-            zero_cnt = one_cnt;
-            one_cnt = next_hap;
-            next_hap = zero_cnt + one_cnt;
+    private static void fibonacci(int N) {
+        // zeroTemp와 oneTemp의 초기값은 N이 1일 때의 0과 1의 개수이다.
+        int zeroTemp = 0;
+        int oneTemp = 1;
+
+        for (int i = 2; i <= N; i++) {
+            zeroCnt = Math.max(zeroTemp, oneTemp);
+            oneCnt = zeroCnt + zeroTemp;
+
+            zeroTemp = zeroCnt;
+            oneTemp = oneCnt;
         }
     }
 }
