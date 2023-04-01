@@ -23,7 +23,7 @@ public class Cheese2636 {
         }
     }
 
-    static Queue<Point> pointList = new ArrayDeque<>();
+    static Queue<Point> pointQueue = new ArrayDeque<>();
     static int day = 0;
     static int cnt = 0;
     static int size = 0;
@@ -65,8 +65,8 @@ public class Cheese2636 {
             }
 
             // 치즈를 녹인다.
-            while(!pointList.isEmpty()) {
-                Point poll = pointList.poll();
+            while(!pointQueue.isEmpty()) {
+                Point poll = pointQueue.poll();
                 map[poll.x][poll.y] = 0;
                 size++;
             }
@@ -114,7 +114,7 @@ public class Cheese2636 {
         }
 
         if (flag) {
-            pointList.add(new Point(x, y));
+            pointQueue.add(new Point(x, y));
         }
     }
 
