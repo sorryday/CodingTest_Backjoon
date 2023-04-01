@@ -2,22 +2,13 @@ package bfs;
 
 import java.io.*;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Queue;
-import java.util.Set;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Cheese2636 {
     static int N, M;
     static int[][] map;
     static boolean[][] visited;
-    static boolean[][] cheeseVisited;
 
     static int[] dx = {1, -1, 0, 0};
     static int[] dy = {0, 0, 1, -1};
@@ -25,7 +16,6 @@ public class Cheese2636 {
     static class Point {
         int x;
         int y;
-        int day;
 
         public Point(int x, int y) {
             this.x = x;
